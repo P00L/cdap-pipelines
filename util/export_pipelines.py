@@ -116,4 +116,4 @@ for namespace in getNamespaces():
                 p['config'] = json.loads(app.get('configuration'))
                 spec = json.dumps(p, sort_keys=True, indent=4)
                 # exportPipeline(ns, pipeline_name + cdap_version, spec)
-                exportPipeline(ns, pipeline_name, spec)
+                exportPipeline(ns, pipeline_name + "-cdap-data-pipeline", spec)
