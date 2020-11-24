@@ -1,0 +1,34 @@
+steps:
+  # ********** GETTING SECRETS **********
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - gsutil
+      - cp
+      - -r
+      - gs://$_SECRET_BUCKET/$_NAMESPACE/profile
+      - ./
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - gsutil
+      - cp
+      - gs://$_SECRET_BUCKET/$_NAMESPACE/df_parameter.yaml
+      - ./df_parameter.yaml
+  # OPTIONAL retrieve artifact from GCS
+  - name: gcr.io/$PROJECT_ID/sonar-scanner:latest
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'if [ "$_GCS_ARTIFACT" == true ]; then gsutil cp -r gs://$_SECRET_BUCKET/$_NAMESPACE/artifact ./; fi'
+  # ********** DATA FUSION SYNC **********
+  - name: 'docker.io/library/python:3.7'
+    args: [ 'pip', 'install', '-t', '/workspace/lib', '-r', 'requirements.txt' ]
+  - name: 'docker.io/library/python:3.7'
+    args: [ 'python', 'deploy.py' ]
+    env:
+      - PYTHONPATH=/workspace/lib
+      - DF_VERSION=$_DF_VERSION
+      - UPGRADE_PIPELINE=$_UPGRADE_PIPELINE
+      - DF_ENDPOINT=$_DF_ENDPOINT
+      - NAMESPACE=$_NAMESPACE
+      - PIPELINE_FOLDER=$_PIPELINE_FOLDER
+timeout: '600s'

@@ -1,0 +1,10 @@
+- type: normal
+  values:
+    - name: system.profile.name
+      value: USER:remote_hadoop
+- name: db_password
+  value: my_password
+  type: secure
+- name: db_user
+  value: my_suer
+  type: secure

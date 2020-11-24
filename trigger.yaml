@@ -1,0 +1,8 @@
+- sourcePipelineName: Titanic_01
+  targetPipelineName: Titanic_02
+  pipelineStatus:
+    - COMPLETED
+  macrosMapping:
+    - source: Titanic_01_parameter
+      target: Titanic_02_parameter
+

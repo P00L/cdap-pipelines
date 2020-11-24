@@ -1,0 +1,33 @@
+{
+  "name": "remote_hadoop",
+  "label": "remote_hadoop",
+  "description": "remote_hadoop",
+  "scope": "SYSTEM",
+  "status": "ENABLED",
+  "provisioner": {
+    "name": "remote-hadoop",
+    "properties": [
+      {
+        "name": "host",
+        "value": "my_ip",
+        "isEditable": true
+      },
+      {
+        "name": "user",
+        "value": "my_user",
+        "isEditable": true
+      },
+      {
+        "name": "sshKey",
+        "value": "my_key",
+        "isEditable": true
+      },
+      {
+        "name": "initializationAction",
+        "value": "",
+        "isEditable": true
+      }
+    ]
+  },
+  "created": 1605783856
+}
